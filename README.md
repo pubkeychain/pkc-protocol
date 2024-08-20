@@ -4,6 +4,7 @@ Bitcoin-based public-key chaining protocol for self-sovereign digital identity m
 
 No issuer, no certificate authority, no personal details. Your keys are in your hands.
 
+
 ## Specification
 
 The Bitcoin blockchain is used as a distributed public-key store.
@@ -30,6 +31,8 @@ To rotate the certificate, the controller creates a new key pair, and then inscr
 When a new inscription is added, the previous certificate becomes read-only. No new records can be created with the previous, read-only certificate. 
 This means that all records created with any previous key can still be validated and they all contribute to the history of the identity. 
 
+The certificates have no predefined expiration time.
+
 
 ### Deprecate
 
@@ -38,5 +41,26 @@ To permanently deprecate an identity, publish an inscription in the format:
 pkcp:d
 ```
 
-A grace period of 48 hrs is granted to re-enable the identity with a new public key. If the grace period is exceeded, any further keys are ignored.
+A grace period of 48 hrs is granted to re-enable the identity with a new public key.
+
+Any keys inscribed after the identity was irrevocably deprecated constitute a new and unrelated identity with no claim to the previously inscribed keys.
+
+
+### Decentralized trustless naming solution
+
+Once the controller creates an identity by inscribing a satoshi, they are automatically granted the use of the namespace derived by base26 encoding the cornerstone satoshi ordinal number (satoshi name). 
+
+Since satoshis are numbered consecutively, this automatically makes all the names unique and no third party needs to take care of the naming conflicts.
+
+Since all names are comprised of only letters, dots can be used as spacers for better legibility, but are ignored otherwise.
+
+Identity management and trading are entirely in the hands of the identity controller.
+
+
+## Security considerations
+
+It is recommended that the controller is in fact the owner of the cornerstone satoshi. The controller needs to own the satoshi to inscribe it but then needs to take care to not sell it inadvertently.
+
+Any services interacting with these identities need to make sure that the controller provides proof of the corresponding private key. 
+
 
