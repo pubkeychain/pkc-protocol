@@ -13,7 +13,7 @@ A certificate is a public-private key pair.
 
 An identity is a chain of consecutive public keys inscribed on the same satoshi. The inscribed satoshi is the cornerstone of the identity, a cornersat. 
 
-The [Ordinals Protocol](https://docs.ordinals.com/) is used to inscribe the satoshi, read the inscription content, and keep track of the cornerstone satoshi by its ordinal number or name. Inscriptions are permanent and immutable. This protocol leverages the mostly ignored fact that each satoshi can be [inscribed multiple times](https://docs.ordinals.com/inscriptions.html#reinscriptions).
+The [Ordinal Theory](https://docs.ordinals.com/) is used to inscribe the satoshi, read the inscription content, and keep track of the cornerstone satoshi by its ordinal number or name. Inscriptions are permanent and immutable. This protocol leverages the mostly ignored fact that each satoshi can be [inscribed multiple times](https://docs.ordinals.com/inscriptions.html#reinscriptions).
 
 The controller is the entity in charge of the identity and can be an individual or an organization. The controller holds the keys of a non-empty Bitcoin wallet.
 
@@ -57,10 +57,13 @@ Since all names are comprised of only letters, dots can be used as spacers for b
 Identity management and trading are entirely in the hands of the identity controller.
 
 
-## Security considerations
+## Security and network considerations
 
 It is recommended that the controller is in fact the owner of the cornerstone satoshi. The controller needs to own the satoshi to inscribe it but then needs to take care to not sell it inadvertently.
 
 Any services interacting with these identities need to make sure that the controller provides proof of the corresponding private key. 
+
+No changes need to be implemented on the Bitcoin network. The protocol is lightweight. The proposed inscriptions are short and plain text. Ordinal Explorer provides a sufficient API to keep track of inscribed satoshis.
+
 
 
