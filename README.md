@@ -13,7 +13,7 @@ A certificate is a public-private key pair.
 
 An identity is a chain of consecutive public keys inscribed on the same satoshi. The inscribed satoshi is the cornerstone of the identity, a cornersat. 
 
-The [Ordinal Theory](https://docs.ordinals.com/) is used to inscribe the satoshi, read the inscription content, and keep track of the cornerstone satoshi by its ordinal number or name. Inscriptions are permanent and immutable. This protocol leverages the mostly ignored fact that each satoshi can be [inscribed multiple times](https://docs.ordinals.com/inscriptions.html#reinscriptions).
+The [Ordinal Theory](https://docs.ordinals.com/) is used to inscribe the satoshi, read the inscription content, and keep track of the cornerstone satoshi by its ordinal number or name. Inscriptions are permanent and immutable. This protocol leverages the fact that each satoshi can be [inscribed multiple times](https://docs.ordinals.com/inscriptions.html#reinscriptions).
 
 The controller is the entity in charge of the identity and can be an individual or an organization. The controller holds the keys of a non-empty Bitcoin wallet.
 
@@ -52,16 +52,16 @@ Once the controller creates an identity by inscribing a satoshi, they are automa
 
 Since satoshis are numbered consecutively, this automatically makes all the names unique and no third party needs to take care of the naming conflicts.
 
-Since all names are comprised of only letters, dots can be used as spacers for better legibility, but are ignored otherwise.
+Since all names are comprised of only letters, dots can be used as spacers for better legibility but are ignored otherwise.
 
 Identity management and trading are entirely in the hands of the identity controller.
 
 
 ## Security and network considerations
 
-It is recommended that the controller is in fact the owner of the cornerstone satoshi. The controller needs to own the satoshi to inscribe it but then needs to take care to not sell it inadvertently.
+It is recommended that the controller owns the cornerstone satoshi. The controller needs to own the satoshi to inscribe it but then needs to take care to not sell it inadvertently.
 
-Any services interacting with these identities need to make sure that the controller provides proof of the corresponding private key. 
+Any services interacting with these identities need to make sure that the controller provides proof of the corresponding private key. No service built on this protocol should take the complete list of public keys at face value. Bad actors can easily engineer a public key inscription but not the corresponding private key. History cannot be changed and past certificates cannot retroactively be claimed. For the services, history starts at the first interaction and only a currently valid certificate should be considered. The services should also require proof of current/latest certificate for further interactions. Public keys with which no valid interactions were recorded should be ignored even if they fall between two validated keys on the same satoshi. 
 
 No changes need to be implemented on the Bitcoin network. The protocol is lightweight. The proposed inscriptions are short and plain text. Ordinal Explorer provides a sufficient API to keep track of inscribed satoshis.
 
